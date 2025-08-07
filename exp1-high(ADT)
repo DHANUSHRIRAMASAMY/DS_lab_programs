@@ -114,7 +114,7 @@ int main() {
             case 7:
                 reverse();
                 break;
-            case 9:
+            case 8:
                 printf("Exiting program.\n");
                 break;
             default:
@@ -134,7 +134,7 @@ OUTPUT:
 5. Display even elements only
 6. Calculate the sum of even elements
 7. Display the elements in the reverse order
-9. Exit
+8. Exit
 Enter your choice: 1
 Enter element: 10
 Inserted: 10
@@ -166,6 +166,6 @@ Enter your choice: 3
 All elements:
 10
 
-Enter your choice: 9
+Enter your choice: 8
 Exiting program.
 ___________________________________________________________________________
