@@ -1,0 +1,225 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define CAPACITY 100
+
+float queue[CAPACITY];
+unsigned int size = 0;
+unsigned int rear = CAPACITY - 1;
+unsigned int front = 0;
+
+// Check if queue is full
+int isFull() {
+    return (size == CAPACITY);
+}
+
+// Check if queue is empty
+int isEmpty() {
+    return (size == 0);
+}
+
+// Enqueue element to queue
+int enqueue(float data) {
+    if (isFull()) {
+        return 0;  // Failed to enqueue
+    }
+    rear = (rear + 1) % CAPACITY;
+    queue[rear] = data;
+    size++;
+    return 1;  // Success
+}
+
+// Dequeue element from queue
+float dequeue() {
+    if (isEmpty()) {
+        return -1e30f;  // Sentinel value indicating empty queue
+    }
+    float data = queue[front];
+    front = (front + 1) % CAPACITY;
+    size--;
+    return data;
+}
+
+// Get the front element without removing it
+float getFront() {
+    if (isEmpty()) {
+        return -1e30f;
+    }
+    return queue[front];
+}
+
+// Get the rear element without removing it
+float getRear() {
+    if (isEmpty()) {
+        return -1e30f;
+    }
+    return queue[rear];
+}
+
+int main() {
+    int choice;
+    float data;
+
+    while (1) {
+        printf("Menu:\n");
+        printf("1. Enqueue\n");
+        printf("2. Dequeue\n");
+        printf("3. Size\n");
+        printf("4. Get Rear\n");
+        printf("5. Get Front\n");
+        printf("0. Exit\n");
+        printf("Select an option: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter data to enqueue: ");
+                scanf("%f", &data);
+                if (enqueue(data)) {
+                    printf("Element %.2f added to queue.\n", data);
+                } else {
+                    printf("Queue is full.\n");
+                }
+                break;
+
+            case 2:
+                data = dequeue();
+                if (data == -1e30f) {
+                    printf("Queue is empty.\n");
+                } else {
+                    printf("Dequeued data: %.2f\n", data);
+                }
+                break;
+
+            case 3:
+                if (isEmpty()) {
+                    printf("Queue is empty.\n");
+                } else {
+                    printf("Queue size: %u\n", size);
+                }
+                break;
+
+            case 4:
+                data = getRear();
+                if (data == -1e30f) {
+                    printf("Queue is empty.\n");
+                } else {
+                    printf("Rear element: %.2f\n", data);
+                }
+                break;
+
+            case 5:
+                data = getFront();
+                if (data == -1e30f) {
+                    printf("Queue is empty.\n");
+                } else {
+                    printf("Front element: %.2f\n", data);
+                }
+                break;
+
+            case 0:
+                printf("Exiting program.\n");
+                exit(0);
+
+            default:
+                printf("Invalid choice. Please enter a number between 0 and 5.\n");
+        }
+
+        printf("\n");
+    }
+
+    return 0;
+}
+____________________________________________________________________________________________________
+Menu:
+1. Enqueue
+2. Dequeue
+3. Size
+4. Get Rear
+5. Get Front
+0. Exit
+Select an option: 1
+Enter data to enqueue: 10.5
+Element 10.50 added to queue.
+
+Menu:
+1. Enqueue
+2. Dequeue
+3. Size
+4. Get Rear
+5. Get Front
+0. Exit
+Select an option: 1
+Enter data to enqueue: 25.7
+Element 25.70 added to queue.
+
+Menu:
+1. Enqueue
+2. Dequeue
+3. Size
+4. Get Rear
+5. Get Front
+0. Exit
+Select an option: 3
+Queue size: 2
+
+Menu:
+1. Enqueue
+2. Dequeue
+3. Size
+4. Get Rear
+5. Get Front
+0. Exit
+Select an option: 5
+Front element: 10.50
+
+Menu:
+1. Enqueue
+2. Dequeue
+3. Size
+4. Get Rear
+5. Get Front
+0. Exit
+Select an option: 4
+Rear element: 25.70
+
+Menu:
+1. Enqueue
+2. Dequeue
+3. Size
+4. Get Rear
+5. Get Front
+0. Exit
+Select an option: 2
+Dequeued data: 10.50
+
+Menu:
+1. Enqueue
+2. Dequeue
+3. Size
+4. Get Rear
+5. Get Front
+0. Exit
+Select an option: 2
+Dequeued data: 25.70
+
+Menu:
+1. Enqueue
+2. Dequeue
+3. Size
+4. Get Rear
+5. Get Front
+0. Exit
+Select an option: 2
+Queue is empty.
+
+Menu:
+1. Enqueue
+2. Dequeue
+3. Size
+4. Get Rear
+5. Get Front
+0. Exit
+Select an option: 0
+Exiting program.
+________________________________________________________________________
