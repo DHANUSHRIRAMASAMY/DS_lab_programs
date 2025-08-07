@@ -1,0 +1,127 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* STACK_ODD = NULL;
+struct Node* STACK_EVEN = NULL;
+
+void push(struct Node** root, int x) {
+    struct Node* stackNode = (struct Node*)malloc(sizeof(struct Node));
+    stackNode->data = x;
+    stackNode->next = *root;
+    *root = stackNode;
+}
+
+void segregate(struct Node* STACK) {
+    while (STACK) {
+        int x = STACK->data;
+        printf("%d ", x);
+        if (x % 2 == 1) {
+            push(&STACK_ODD, x);
+            printf("pushed to STACK_ODD\n");
+        } else {
+            push(&STACK_EVEN, x);
+            printf("pushed to STACK_EVEN\n");
+        }
+        STACK = STACK->next;
+    }
+    printf("\n");
+}
+
+void display(struct Node* st) {
+    if (st == NULL) {
+        printf("Stack is empty.\n");
+        return;
+    }
+    while (st) {
+        printf("%d ", st->data);
+        st = st->next;
+    }
+    printf("\n");
+}
+
+int main() {
+    struct Node* STACK = NULL;
+    int choice;
+    int temp;
+    int running = 1;
+
+    printf("Menu:\n1. Push\n2. Segregate\n3. Display STACK_ODD\n4. Display STACK_EVEN\n5. Exit\n");
+
+    while (running) {
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter number to push: ");
+                scanf("%d", &temp);
+                push(&STACK, temp);
+                printf("%d pushed to STACK\n", temp);
+                break;
+
+            case 2:
+                printf("Segregation:\n");
+                segregate(STACK);
+                break;
+
+            case 3:
+                printf("Displaying STACK_ODD:\n");
+                display(STACK_ODD);
+                break;
+
+            case 4:
+                printf("Displaying STACK_EVEN:\n");
+                display(STACK_EVEN);
+                break;
+
+            case 5:
+                running = 0;
+                break;
+
+            default:
+                printf("Invalid key\n");
+                break;
+        }
+    }
+    return 0;
+}
+_________________________________________________________________
+OUTPUT:
+Menu:
+1. Push
+2. Segregate
+3. Display STACK_ODD
+4. Display STACK_EVEN
+5. Exit
+Enter choice: 1
+Enter number to push: 10
+10 pushed to STACK
+Enter choice: 1
+Enter number to push: 15
+15 pushed to STACK
+Enter choice: 1
+Enter number to push: 22
+22 pushed to STACK
+Enter choice: 1
+Enter number to push: 7
+7 pushed to STACK
+Enter choice: 2
+Segregation:
+7 pushed to STACK_ODD
+22 pushed to STACK_EVEN
+15 pushed to STACK_ODD
+10 pushed to STACK_EVEN
+
+Enter choice: 3
+Displaying STACK_ODD:
+15 7 
+Enter choice: 4
+Displaying STACK_EVEN:
+10 22 
+Enter choice: 5
+____________________________________________________________
